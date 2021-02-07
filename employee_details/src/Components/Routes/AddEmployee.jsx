@@ -1,0 +1,90 @@
+import React, { Component } from 'react'
+import axios from "axios";
+
+export default class Todo extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: "",
+            email:"",
+            phone: "",
+            dob: "",
+            gender: "",
+            hobbies: [],
+            employeeData: []
+        }
+    }
+
+    addSubmit = (e) => {
+        e.preventDefault()
+        const {name,email,phone,dob,gender,hobbies} = this.state
+        let payload = {
+            name: name,
+            email: email,
+            phone: phone,
+            dob:dob,
+            gender:gender,
+            hobbies: hobbies
+        }
+        axios({
+            method:'POST',
+            url:"http://localhost:3000/employeeDetails",
+            data:payload
+        })
+        .then(res=>{
+            if(res.data.id){
+                this.setState({employeeData:[...this.state.employeeData,payload]})
+            }
+        })
+        .catch(err=>console.log('error',err))
+    }
+    
+    render() {
+        const {employeeData} = this.state
+        // console.log(employeeData)
+        return (
+            <>
+                <div>
+                    <form>
+                        <input placeholder="Name" value={this.state.name} type="text" onChange={(e)=> this.setState({name: e.target.value})} /><br/>
+                        <input placeholder="Email" value={this.state.email} type="email" onChange={(e)=> this.setState({email: e.target.value})} /><br/>
+                        <input placeholder="Phone" value={this.state.phone} type="number" onChange={(e)=> this.setState({phone: e.target.value})} /><br/>
+                        <input placeholder="Dob" value={this.state.dob} type="date" onChange={(e)=> this.setState({dob: e.target.value})} /><br/>
+                        {/* <input placeholder="gender" value={this.state.gender} type="text" onChange={(e)=> this.setState({gender: e.target.value})} /><br/> */}
+                        <input type="radio" id="male" name="gender" value="male" onChange={(e)=> this.setState({gender: e.target.value})}/>
+                        <label for="male">Male</label>
+                        <input type="radio" id="female" name="gender" value="female" onChange={(e)=> this.setState({gender: e.target.value})}/>
+                        <label for="female">Female</label>
+                        <input type="radio" id="other" name="gender" value="other" onChange={(e)=> this.setState({gender: e.target.value})}/>
+                        <label for="other">Other</label><br/>
+                        {/* <input placeholder="hobbies" value={this.state.hobbies} type="text" onChange={(e)=> this.setState({hobbies: e.target.value})} /><br/> */}
+                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Cricket" onChange={(e)=> this.setState({hobbies:[...this.state.hobbies, e.target.value]})} />
+                        <label for="vehicle1"> Cricket</label>
+                        <input type="checkbox" id="vehicle2" name="vehicle2" value="Football" onChange={(e)=> this.setState({hobbies:[...this.state.hobbies, e.target.value]})} />
+                        <label for="vehicle2"> Football</label>
+                        <input type="checkbox" id="vehicle3" name="vehicle3" value="Travelling" onChange={(e)=> this.setState({hobbies:[...this.state.hobbies, e.target.value]})} />
+                        <label for="vehicle3"> Travelling</label><br/>
+                        <button onClick={this.addSubmit}>Add Employee</button>
+                    </form>
+                </div>
+                <div>
+                    {
+                        employeeData && employeeData.map(item=>{
+                            return(
+                                <>
+                                    <div key={item.id}>{item.name}</div>
+                                    <div>{item.email}</div>
+                                    <div>{item.phone}</div>
+                                    <div>{item.dob}</div>
+                                    <div>{item.gender}</div>
+                                    <div>{item.hobbies}</div>
+                                </>
+                            )
+                        })
+                            
+                    }
+                </div>
+            </>
+        )
+    }
+}
