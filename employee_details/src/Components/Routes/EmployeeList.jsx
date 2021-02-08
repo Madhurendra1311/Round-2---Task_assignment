@@ -6,50 +6,70 @@ export default class TodoList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        employeeData:[]
+      employeeData: []
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     axios
-    .get("http://localhost:3000/employeeDetails")
-    .then(res=>{
+      .get("http://localhost:3000/employeeDetails")
+      .then(res => {
         this.setState({
-            employeeData:res.data
+          employeeData: res.data
         })
-    })
-    .catch(err=>console.log(err))
-}
-handleDelete = (id)=>{
-  axios
-  .delete(`http://localhost:3000/employeeDetails/${id}`)
-  .then(res=>{
-    alert('Delete Successfully')
-    window.location.reload()
-  })
-  .catch(err=>console.log(err))
-}
+      })
+      .catch(err => console.log(err))
+  }
+  handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:3000/employeeDetails/${id}`)
+      .then(res => {
+        alert('Delete Successfully')
+        window.location.reload()
+      })
+      .catch(err => console.log(err))
+  }
 
   render() {
     let employeeData = this.state.employeeData
     return (
       <div>
-            {
-                employeeData && employeeData.length > 0? employeeData.map(item=>(
-                    <div style={{display:"flex",justifyContent:"space-around"}}>
-                    <div key={item.id}>{item.name}</div>
-                    <div key={item.id}>{item.email}</div>
-                    <div key={item.id}>{item.phone}</div>
-                    <div key={item.id}>{item.gender}</div>
-                    <div key={item.id}>{item.hobbies}</div>
-                    <div key={item.id}>{item.dob}</div>
-                    <div><button><Link to={`/editEmployee/${item.id}`}>Edit</Link></button></div>
-                    <div><button onClick={()=>this.handleDelete(item.id)}>Delete</button></div>
-                    </div>
-                    ))
-                :
-                <h3>No tasks Available</h3>
-              }
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+              <th scope="col">DOB</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Hobbies</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+        </table>
+        {
+          employeeData && employeeData.map(item => {
+            return (
+              <>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <th scope="row" key={item.id}>{item.name}</th>
+                      <td>{item.email}</td>
+                      <td>{item.phone}</td>
+                      <td>{item.dob}</td>
+                      <td>{item.gender}</td>
+                      <td>{item.hobbies}</td>
+                      <td><button type="button" class="btn btn-outline-success"><Link to={`/editEmployee/${item.id}`}>Edit</Link></button></td>
+                      <td><button type="button" class="btn btn-outline-danger" onClick={() => this.handleDelete(item.id)}>Delete</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </>
+            )
+          })
+        }
       </div>
     )
   }

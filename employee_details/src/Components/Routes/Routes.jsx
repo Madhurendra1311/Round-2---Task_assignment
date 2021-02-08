@@ -10,7 +10,7 @@ function Routes() {
   return (
     <>
       <Route path="/" render={() => <Navbar />} />
-      <Route path="/" exact render={() => <Dashboard/>} />
+      <Route path="/" exact render={() => <Dashboard />} />
       <Route path="/allEmployee" render={() => <EmployeeList />} />
       <Route path="/editEmployee/:id" render={props => <EditEmployee {...props} />} />
     </>

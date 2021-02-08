@@ -1,49 +1,13 @@
 {
   "employeeDetails": [
     {
-      "name": "Kunal Kumar",
-      "email": "kunal@gmail.com",
-      "phone": "45635435",
+      "name": "Madhurendra Kumar",
+      "email": "kmadhu1311@gmail.com",
+      "phone": "08709181793",
       "dob": "12-10-1997",
-      "gender": "Male",
-      "hobbies": [
-        "Cricket"
-      ],
+      "gender": "male",
+      "hobbies": "Cricket",
       "id": 2
-    },
-    {
-      "name": "ghdgdcgh",
-      "email": "nbcghc",
-      "phone": "67655",
-      "dob": "bdchgf",
-      "gender": "fjhgf",
-      "hobbies": "nmfytf",
-      "id": 3
-    },
-    {
-      "name": "gdh",
-      "email": "dhgdccg",
-      "phone": "08622930778",
-      "dob": "nnvbbv",
-      "gender": "nmvhnv",
-      "hobbies": [
-        "mb,j",
-        "Cricket",
-        "Football"
-      ],
-      "id": 4
-    },
-    {
-      "name": "nbchgchg",
-      "email": "fdgxfgx",
-      "phone": "",
-      "dob": "7653556",
-      "gender": "female",
-      "hobbies": [
-        "Travelling",
-        "Football"
-      ],
-      "id": 5
     }
   ]
 }
