@@ -5,7 +5,6 @@ export default class Employee extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLoading: false,
             name: "",
             email: "",
             phone: "",
@@ -101,7 +100,7 @@ export default class Employee extends Component {
                         <button type="button" class="btn btn-primary btn-lg btn-block" onClick={this.addSubmit}>Add Employee</button>
                     </form>
                 </div>
-                <div>
+                <div><br/>
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
